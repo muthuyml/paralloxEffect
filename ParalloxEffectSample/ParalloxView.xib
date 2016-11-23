@@ -73,6 +73,7 @@
         <panGestureRecognizer minimumNumberOfTouches="1" id="3vs-js-Q6S">
             <connections>
                 <action selector="viewPanned:" destination="-1" id="9BC-RP-j68"/>
+                <outlet property="delegate" destination="-1" id="i1K-rM-EzP"/>
             </connections>
         </panGestureRecognizer>
     </objects>

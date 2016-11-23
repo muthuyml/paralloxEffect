@@ -72,6 +72,11 @@ class ParalloxView: UIView {
     
     //MARK: - Pan related changes
     @IBAction func viewPanned(_ sender: UIPanGestureRecognizer) {
+        if isScrollView(view: tableview) {
+            if tableview.contentOffset.y < 0 {
+                
+            }
+        }
         let direction = getPanningDirection(sender)
         let velocity = sender.velocity(in: self)
         var paralloxDirection:ParalloxDirection?
@@ -222,12 +227,15 @@ class ParalloxView: UIView {
         }
     }
     
-    func handlePanningForBodyView() {
-        if tableview.isKind(of: UIScrollView.self) {
+    private func handlePanningForBodyView() {
+        if isScrollView(view: tableview) {
             tableview.panGestureRecognizer.addTarget(self, action: #selector(viewPanned))
         }
     }
     
+    fileprivate func isScrollView(view:UIView) -> Bool {
+        return view.isKind(of: UIScrollView.self)
+    }
 }
 
 extension ParalloxView:UITableViewDelegate, UITableViewDataSource {
@@ -243,5 +251,19 @@ extension ParalloxView:UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = "test \(indexPath.row)"
         return cell
+    }
+}
+
+extension ParalloxView:UIGestureRecognizerDelegate {
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        var shouldBegin = true
+        print("in pan delegate : \(tableview.contentOffset.y)")
+        if isScrollView(view: tableview) {
+            if tableview.contentOffset.y > 0 {
+                print("inside para")
+                shouldBegin = false
+            }
+        }
+        return shouldBegin
     }
 }

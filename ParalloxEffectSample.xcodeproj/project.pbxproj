@@ -266,10 +266,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Dealclan LLC";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Dealclan LLC";
 				INFOPLIST_FILE = ParalloxEffectSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.muthuraj.ParalloxEffectSample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ymedialabs.parallox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "52776e48-f404-4ecf-af42-bf4bd3ca7797";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -278,10 +281,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Dealclan LLC";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: Dealclan LLC";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Dealclan LLC";
 				INFOPLIST_FILE = ParalloxEffectSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.muthuraj.ParalloxEffectSample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ymedialabs.parallox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "52776e48-f404-4ecf-af42-bf4bd3ca7797";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -305,6 +312,7 @@
 				6A412D4F1DE46D550068AA36 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
