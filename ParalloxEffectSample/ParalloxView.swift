@@ -29,7 +29,7 @@ class ParalloxView: UIView {
     }
     
     @IBOutlet weak var headerView: UIView!
-    @IBOutlet weak var bodyView: UIView!
+    //@IBOutlet weak var bodyView: UIView!
     @IBOutlet var contentContainerView: UIView!
     // Animatable constraints
     @IBOutlet weak var bodyViewTopConstraint: NSLayoutConstraint!
@@ -180,8 +180,9 @@ class ParalloxView: UIView {
     }
     
     func setupViews() {
-        tableview.isScrollEnabled = false
+//        tableview.isScrollEnabled = false
         tableview.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        handlePanningForBodyView()
     }
     
     // Get Panning Direction
@@ -220,6 +221,13 @@ class ParalloxView: UIView {
             self.layoutIfNeeded()
         }
     }
+    
+    func handlePanningForBodyView() {
+        if tableview.isKind(of: UIScrollView.self) {
+            tableview.panGestureRecognizer.addTarget(self, action: #selector(viewPanned))
+        }
+    }
+    
 }
 
 extension ParalloxView:UITableViewDelegate, UITableViewDataSource {
