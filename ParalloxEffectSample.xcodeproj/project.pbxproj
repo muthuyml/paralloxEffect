@@ -12,6 +12,8 @@
 		6A412D441DE46D550068AA36 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A412D421DE46D550068AA36 /* Main.storyboard */; };
 		6A412D461DE46D550068AA36 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A412D451DE46D550068AA36 /* Assets.xcassets */; };
 		6A412D491DE46D550068AA36 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A412D471DE46D550068AA36 /* LaunchScreen.storyboard */; };
+		6A412D511DE46D730068AA36 /* ParalloxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A412D501DE46D730068AA36 /* ParalloxView.swift */; };
+		6A412D531DE472410068AA36 /* ParalloxView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A412D521DE472410068AA36 /* ParalloxView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		6A412D451DE46D550068AA36 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6A412D481DE46D550068AA36 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6A412D4A1DE46D550068AA36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6A412D501DE46D730068AA36 /* ParalloxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParalloxView.swift; sourceTree = "<group>"; };
+		6A412D521DE472410068AA36 /* ParalloxView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParalloxView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,8 @@
 				6A412D451DE46D550068AA36 /* Assets.xcassets */,
 				6A412D471DE46D550068AA36 /* LaunchScreen.storyboard */,
 				6A412D4A1DE46D550068AA36 /* Info.plist */,
+				6A412D501DE46D730068AA36 /* ParalloxView.swift */,
+				6A412D521DE472410068AA36 /* ParalloxView.xib */,
 			);
 			path = ParalloxEffectSample;
 			sourceTree = "<group>";
@@ -126,6 +132,7 @@
 				6A412D491DE46D550068AA36 /* LaunchScreen.storyboard in Resources */,
 				6A412D461DE46D550068AA36 /* Assets.xcassets in Resources */,
 				6A412D441DE46D550068AA36 /* Main.storyboard in Resources */,
+				6A412D531DE472410068AA36 /* ParalloxView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,6 +143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A412D511DE46D730068AA36 /* ParalloxView.swift in Sources */,
 				6A412D411DE46D550068AA36 /* ViewController.swift in Sources */,
 				6A412D3F1DE46D550068AA36 /* AppDelegate.swift in Sources */,
 			);

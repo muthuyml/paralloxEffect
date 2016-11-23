@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ParalloxView" customModule="ParalloxEffectSample" customModuleProvider="target">
+            <connections>
+                <outlet property="bodyView" destination="nxE-b1-akK" id="8W3-rL-KgX"/>
+                <outlet property="bodyViewTopConstraint" destination="ZQa-jS-zUh" id="d94-s4-4wa"/>
+                <outlet property="contentContainerView" destination="iN0-l3-epB" id="7me-X4-STT"/>
+                <outlet property="headerView" destination="ZF0-9Q-Da7" id="gOW-bq-SRA"/>
+                <outlet property="headerViewHeight" destination="4OW-Ef-WDI" id="kvy-S9-uPk"/>
+                <outlet property="tableview" destination="l1R-fe-QQ7" id="wVd-yo-EST"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZF0-9Q-Da7">
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="billgates" translatesAutoresizingMaskIntoConstraints="NO" id="5jr-jq-hZi"/>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bNW-PP-c8I">
+                            <frame key="frameInset" minX="95" minY="86" width="182" height="75"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="TamilSangamMN-Bold" family="Tamil Sangam MN" pointSize="31"/>
+                            <state key="normal" title="Send">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="sendClicked:" destination="-1" eventType="touchUpInside" id="pqJ-MW-F4g"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.23878357920000001" green="1" blue="0.34977518769999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="5jr-jq-hZi" firstAttribute="top" secondItem="ZF0-9Q-Da7" secondAttribute="top" id="Lev-dO-DCP"/>
+                        <constraint firstAttribute="trailing" secondItem="5jr-jq-hZi" secondAttribute="trailing" id="U63-mh-obc"/>
+                        <constraint firstAttribute="bottom" secondItem="5jr-jq-hZi" secondAttribute="bottom" id="Yyr-zv-oWT"/>
+                        <constraint firstItem="5jr-jq-hZi" firstAttribute="leading" secondItem="ZF0-9Q-Da7" secondAttribute="leading" id="s27-i6-lIl"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nxE-b1-akK">
+                    <subviews>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="l1R-fe-QQ7">
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="hsx-yl-TXQ"/>
+                                <outlet property="delegate" destination="-1" id="PmL-sI-xBG"/>
+                            </connections>
+                        </tableView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.94901960780000005" green="0.28235294119999998" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="l1R-fe-QQ7" secondAttribute="bottom" id="IMK-dT-dcw"/>
+                        <constraint firstItem="l1R-fe-QQ7" firstAttribute="top" secondItem="nxE-b1-akK" secondAttribute="top" id="LTx-U8-scy"/>
+                        <constraint firstItem="l1R-fe-QQ7" firstAttribute="leading" secondItem="nxE-b1-akK" secondAttribute="leading" id="f3R-fw-2JL"/>
+                        <constraint firstAttribute="trailing" secondItem="l1R-fe-QQ7" secondAttribute="trailing" id="nFk-X5-fX8"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <gestureRecognizers/>
+            <constraints>
+                <constraint firstItem="ZF0-9Q-Da7" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.37" id="4OW-Ef-WDI"/>
+                <constraint firstAttribute="bottom" secondItem="nxE-b1-akK" secondAttribute="bottom" id="84k-pG-ly3"/>
+                <constraint firstItem="ZF0-9Q-Da7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="B2r-DD-A2M"/>
+                <constraint firstItem="nxE-b1-akK" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="249" id="ZQa-jS-zUh"/>
+                <constraint firstAttribute="trailing" secondItem="ZF0-9Q-Da7" secondAttribute="trailing" id="dZz-wV-wA0"/>
+                <constraint firstItem="nxE-b1-akK" firstAttribute="trailing" secondItem="ZF0-9Q-Da7" secondAttribute="trailing" id="jz0-4S-NcC"/>
+                <constraint firstItem="nxE-b1-akK" firstAttribute="leading" secondItem="ZF0-9Q-Da7" secondAttribute="leading" id="rMS-8J-sRH"/>
+                <constraint firstItem="ZF0-9Q-Da7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="z9b-eJ-18p"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <connections>
+                <outletCollection property="gestureRecognizers" destination="3vs-js-Q6S" appends="YES" id="zIC-ea-oC8"/>
+            </connections>
+            <point key="canvasLocation" x="25.5" y="59.5"/>
+        </view>
+        <panGestureRecognizer minimumNumberOfTouches="1" id="3vs-js-Q6S">
+            <connections>
+                <action selector="viewPanned:" destination="-1" id="9BC-RP-j68"/>
+            </connections>
+        </panGestureRecognizer>
+    </objects>
+    <resources>
+        <image name="billgates" width="60" height="60"/>
+    </resources>
+</document>
