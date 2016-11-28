@@ -30,6 +30,9 @@
                             <constraint firstItem="ghN-TB-n0Q" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="zAN-Id-yVw"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="paralloxView" destination="ghN-TB-n0Q" id="Ubl-FM-ULi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

@@ -8,18 +8,29 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController,ParalloxViewDelegate {
+    @IBOutlet weak var paralloxView: ParalloxView!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        paralloxView.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    func paralloxEffectStarted(paralloxView: ParalloxView, direction: ParalloxDirection) {
+        
+    }
+    
+    func paralloxEffectProgress(paralloxView: ParalloxView, progress: CGFloat, direction: ParalloxDirection) {
+        print("percentage : \(progress*100)")
+    }
+    
+    func paralloxEffectEnded(paralloxView: ParalloxView, direction: ParalloxDirection) {
+        
+    }
 
 }
 
