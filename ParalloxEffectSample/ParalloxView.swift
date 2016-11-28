@@ -171,22 +171,22 @@ class ParalloxView: UIView {
 //        }
     }
     
-    // decide body scroll view scrollablity
-    fileprivate func decideScrollablity(view:UIView, direction:ParalloxDirection) {
-        if isScrollView(view: tableview) {
-            var shouldScroll = true
-            if (bodyViewTopConstraint.constant > bodyViewMinValue) && (bodyViewTopConstraint.constant != bodyViewMaxValue) {//tableview.contentOffset.y < 0 {
-                print("Middle of parallox effect")
-                shouldScroll = false
-            } else if  bodyViewTopConstraint.constant == bodyViewMinValue{
-                shouldScroll = (direction == .up) ? true:false
-            }else if bodyViewTopConstraint.constant == bodyViewMaxValue {
-                print("content offset More")
-                shouldScroll = (direction == .up) ? false:true
-            }
-            //tableview.isScrollEnabled = shouldScroll
-        }
-    }
+//    // decide body scroll view scrollablity
+//    fileprivate func decideScrollablity(view:UIView, direction:ParalloxDirection) {
+//        if isScrollView(view: tableview) {
+//            var shouldScroll = true
+//            if (bodyViewTopConstraint.constant > bodyViewMinValue) && (bodyViewTopConstraint.constant != bodyViewMaxValue) {//tableview.contentOffset.y < 0 {
+//                print("Middle of parallox effect")
+//                shouldScroll = false
+//            } else if  bodyViewTopConstraint.constant == bodyViewMinValue{
+//                shouldScroll = (direction == .up) ? true:false
+//            }else if bodyViewTopConstraint.constant == bodyViewMaxValue {
+//                print("content offset More")
+//                shouldScroll = (direction == .up) ? false:true
+//            }
+//            //tableview.isScrollEnabled = shouldScroll
+//        }
+//    }
     
     // calculate New Position
     func calculateNewValue(direction:ParalloxDirection, currentOffset:CGPoint) -> (headerViewHeight:CGFloat,bodyViewHeight:CGFloat){
@@ -215,8 +215,8 @@ class ParalloxView: UIView {
                 calculatedHeaderViewHeight = headerViewMinValue
             }
         }
-        
-        return (calculatedTopConstraint,calculatedTopConstraint)
+        print("header Value : \(calculatedHeaderViewHeight) direction : \(direction)")
+        return (calculatedHeaderViewHeight,calculatedTopConstraint)
     }
     
     /*
@@ -279,6 +279,7 @@ class ParalloxView: UIView {
     }
     
     fileprivate func updateHeaderViewConstraints(newValue:CGFloat) {
+        print("updated Header Height : \(newValue)")
         headerViewHeight.constant = newValue
     }
     
@@ -307,13 +308,17 @@ extension ParalloxView:UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 200
+        return 11
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = "test \(indexPath.row)"
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
     }
 }
 
