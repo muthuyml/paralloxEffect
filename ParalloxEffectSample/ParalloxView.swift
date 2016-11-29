@@ -72,101 +72,118 @@ class ParalloxView: UIView {
     
     //MARK: - Pan related changes
     @IBAction func viewPanned(_ sender: UIPanGestureRecognizer) {
-        let direction = getPanningDirection(sender)
-        let velocity = sender.velocity(in: self)
-        var paralloxDirection:ParalloxDirection?
-        if direction == .top {
-            paralloxDirection = .up
-        } else if direction == .bottom {
-            paralloxDirection = .down
-        }
-        // check scrollablity
-        if let paralloxDirection = paralloxDirection {
-            //decideScrollablity(view: tableview, direction: paralloxDirection)
-        }
-        let currentLocation = sender.location(in: self)
+//        let direction = getPanningDirection(sender)
+//        let velocity = sender.velocity(in: self)
+//        var paralloxDirection:ParalloxDirection?
+//        if direction == .top {
+//            paralloxDirection = .up
+//        } else if direction == .bottom {
+//            paralloxDirection = .down
+//        }
+//        // check scrollablity
+//        if let paralloxDirection = paralloxDirection {
+//            //decideScrollablity(view: tableview, direction: paralloxDirection)
+//        }
+//        let currentLocation = sender.location(in: self)
+//        switch sender.state {
+//        case .began:
+////            if let pxDirection = paralloxDirection {
+////                self.delegate?.paralloxEffectStarted(paralloxView: self, direction: pxDirection)
+////            }
+//            //let currentLocation = sender.location(in: self)
+//            previousPoint = currentLocation
+//            break
+//        case .changed:
+//            //let currentLocation = sender.location(in: self)
+//            //let difference = abs(previousPoint.y - currentLocation.y)
+//            var calculatedTopConstraint = CGFloat(0)
+//            //print("velocity : \(velocity)")
+//            switch  direction {
+//            case .left:
+//                break
+//            case .right:
+//                break
+//            case .top:
+////                calculatedTopConstraint = bodyViewTopConstraint.constant - difference//previousPoint.y+velocity.y
+////                var calculatedHeaderViewHeight = headerViewHeight.constant - (difference*0.5)
+////                previousPoint = currentLocation
+////                print("Top : calculated : \(calculatedTopConstraint)")
+////                if calculatedTopConstraint < bodyViewMinValue {
+////                    print("inside Top : calculated : \(calculatedTopConstraint)")
+////                    calculatedTopConstraint = bodyViewMinValue
+////                }
+////                if calculatedHeaderViewHeight < headerViewMinValue {
+////                    calculatedHeaderViewHeight = headerViewMinValue
+////                }
+////                if calculatedHeaderViewHeight > headerViewMaxValue {
+////                    calculatedHeaderViewHeight = headerViewMaxValue
+////                }
+//                let calculatedValue = calculateNewValue(direction: .up, currentOffset: currentLocation)
+//                previousPoint = currentLocation
+//                // update body view top constraints
+//                updateBodyViewConstraints(newValue: calculatedValue.bodyViewHeight)
+//                updateHeaderViewConstraints(newValue: calculatedValue.headerViewHeight)
+//                animateLayoutChanges()
+//                break
+//            case .bottom:
+////                calculatedTopConstraint = bodyViewTopConstraint.constant + difference//previousPoint.y+velocity.y
+////                var calculatedHeaderViewHeight = headerViewHeight.constant + (difference*0.5)
+////                previousPoint = currentLocation
+////                print("bottom : calculated : \(calculatedTopConstraint)")
+////                if calculatedTopConstraint > bodyViewMaxValue {
+////                    print("inside bottom : calculated : \(calculatedTopConstraint) and Max : \(bodyViewMaxValue)")
+////                    calculatedTopConstraint = bodyViewMaxValue
+////                }
+////                if calculatedHeaderViewHeight > headerViewMaxValue {
+////                    calculatedHeaderViewHeight = headerViewMaxValue
+////                }
+//                let calculatedValue = calculateNewValue(direction: .down, currentOffset: currentLocation)
+//                previousPoint = currentLocation
+//                // update body view top constraints
+//                updateBodyViewConstraints(newValue: calculatedValue.bodyViewHeight)
+//                updateHeaderViewConstraints(newValue: calculatedValue.headerViewHeight)
+//                animateLayoutChanges()
+//                break
+//            }
+////            if let pxDirection = paralloxDirection {
+////                self.delegate?.paralloxEffectProgress(paralloxView: self, progress: 0.0, direction: pxDirection)
+////            }
+//            break
+//        case .ended:
+////            if let pxDirection = paralloxDirection {
+////                self.delegate?.paralloxEffectEnded(paralloxView: self, direction: pxDirection)
+////            }
+////            if direction == .top || direction == .bottom {
+////                var calculatedTopConstraint = CGFloat(0)
+////                var calculatedHeaderViewHeight = CGFloat(0)
+////                calculatedTopConstraint = bodyViewMaxValue
+////                calculatedHeaderViewHeight = headerViewMaxValue
+////                if direction == .top {
+////                    calculatedTopConstraint = bodyViewMinValue
+////                    calculatedHeaderViewHeight = headerViewMinValue
+////                }
+////                // update body view top constraints
+////                updateBodyViewConstraints(newValue: calculatedTopConstraint)
+////                updateHeaderViewConstraints(newValue: calculatedHeaderViewHeight)
+////                animateLayoutChanges()
+////            }
+//            break
+//        default:
+//            break
+//        }
+    }
+    
+    func handlePan(sender:UIPanGestureRecognizer) {
+        let currentPoint = sender.location(in: self)
         switch sender.state {
         case .began:
-            if let pxDirection = paralloxDirection {
-                self.delegate?.paralloxEffectStarted(paralloxView: self, direction: pxDirection)
-            }
-            //let currentLocation = sender.location(in: self)
-            previousPoint = currentLocation
+            previousPoint = currentPoint
             break
         case .changed:
-            //let currentLocation = sender.location(in: self)
-            //let difference = abs(previousPoint.y - currentLocation.y)
-            var calculatedTopConstraint = CGFloat(0)
-            print("velocity : \(velocity)")
-            switch  direction {
-            case .left:
-                break
-            case .right:
-                break
-            case .top:
-//                calculatedTopConstraint = bodyViewTopConstraint.constant - difference//previousPoint.y+velocity.y
-//                var calculatedHeaderViewHeight = headerViewHeight.constant - (difference*0.5)
-//                previousPoint = currentLocation
-//                print("Top : calculated : \(calculatedTopConstraint)")
-//                if calculatedTopConstraint < bodyViewMinValue {
-//                    print("inside Top : calculated : \(calculatedTopConstraint)")
-//                    calculatedTopConstraint = bodyViewMinValue
-//                }
-//                if calculatedHeaderViewHeight < headerViewMinValue {
-//                    calculatedHeaderViewHeight = headerViewMinValue
-//                }
-//                if calculatedHeaderViewHeight > headerViewMaxValue {
-//                    calculatedHeaderViewHeight = headerViewMaxValue
-//                }
-                let calculatedValue = calculateNewValue(direction: .up, currentOffset: currentLocation)
-                previousPoint = currentLocation
-                // update body view top constraints
-                updateBodyViewConstraints(newValue: calculatedValue.bodyViewHeight)
-                updateHeaderViewConstraints(newValue: calculatedValue.headerViewHeight)
-                animateLayoutChanges()
-                break
-            case .bottom:
-//                calculatedTopConstraint = bodyViewTopConstraint.constant + difference//previousPoint.y+velocity.y
-//                var calculatedHeaderViewHeight = headerViewHeight.constant + (difference*0.5)
-//                previousPoint = currentLocation
-//                print("bottom : calculated : \(calculatedTopConstraint)")
-//                if calculatedTopConstraint > bodyViewMaxValue {
-//                    print("inside bottom : calculated : \(calculatedTopConstraint) and Max : \(bodyViewMaxValue)")
-//                    calculatedTopConstraint = bodyViewMaxValue
-//                }
-//                if calculatedHeaderViewHeight > headerViewMaxValue {
-//                    calculatedHeaderViewHeight = headerViewMaxValue
-//                }
-                let calculatedValue = calculateNewValue(direction: .up, currentOffset: currentLocation)
-                previousPoint = currentLocation
-                // update body view top constraints
-                updateBodyViewConstraints(newValue: calculatedValue.bodyViewHeight)
-                updateHeaderViewConstraints(newValue: calculatedValue.headerViewHeight)
-                animateLayoutChanges()
-                break
-            }
-            if let pxDirection = paralloxDirection {
-                self.delegate?.paralloxEffectProgress(paralloxView: self, progress: 0.0, direction: pxDirection)
-            }
+            
             break
         case .ended:
-            if let pxDirection = paralloxDirection {
-                self.delegate?.paralloxEffectEnded(paralloxView: self, direction: pxDirection)
-            }
-            if direction == .top || direction == .bottom {
-                var calculatedTopConstraint = CGFloat(0)
-                var calculatedHeaderViewHeight = CGFloat(0)
-                calculatedTopConstraint = bodyViewMaxValue
-                calculatedHeaderViewHeight = headerViewMaxValue
-                if direction == .top {
-                    calculatedTopConstraint = bodyViewMinValue
-                    calculatedHeaderViewHeight = headerViewMinValue
-                }
-                // update body view top constraints
-                updateBodyViewConstraints(newValue: calculatedTopConstraint)
-                updateHeaderViewConstraints(newValue: calculatedTopConstraint/2)
-                animateLayoutChanges()
-            }
+            previousPoint = currentPoint
             break
         default:
             break
@@ -217,7 +234,7 @@ class ParalloxView: UIView {
                 calculatedHeaderViewHeight = headerViewMinValue
             }
         }
-        print("header Value : \(calculatedHeaderViewHeight) direction : \(direction)")
+        //print("header Value : \(calculatedHeaderViewHeight) direction : \(direction)")
         return (calculatedHeaderViewHeight,calculatedTopConstraint)
     }
     
@@ -281,7 +298,6 @@ class ParalloxView: UIView {
     }
     
     fileprivate func updateHeaderViewConstraints(newValue:CGFloat) {
-        print("updated Header Height : \(newValue)")
         headerViewHeight.constant = newValue
     }
     
@@ -327,13 +343,13 @@ extension ParalloxView:UITableViewDelegate, UITableViewDataSource {
 extension ParalloxView:UIGestureRecognizerDelegate {
     override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         var shouldBegin = true
-//        print("in pan delegate : \(tableview.contentOffset.y)")
-//        if isScrollView(view: tableview) {
-//            if tableview.contentOffset.y > 0 {
-//                print("inside para")
-//                shouldBegin = false
-//            }
-//        }
+        print("in pan delegate : \(tableview.contentOffset.y)")
+        if isScrollView(view: tableview) {
+            if tableview.contentOffset.y > 0 {
+                print("inside para")
+                //shouldBegin = false
+            }
+        }
         return shouldBegin
     }
 }
@@ -341,29 +357,34 @@ extension ParalloxView:UIGestureRecognizerDelegate {
 extension ParalloxView:UIScrollViewDelegate {
     
     func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-        var direction = ParalloxDirection.up
-        print("content Offset : \(scrollView.contentOffset)")
-        
-        if scrollView.contentOffset.y <= 0 {
-            direction = .down
-        }
-        self.delegate?.paralloxEffectStarted(paralloxView: self, direction: direction)
+        //let currentTouchPoint = scrollView.panGestureRecognizer.location(in: self)
+        previousPoint = scrollView.contentOffset
+//        var direction = ParalloxDirection.up
+//        if scrollView.contentOffset.y <= 0 {
+//            direction = .down
+//        }
+//        self.delegate?.paralloxEffectStarted(paralloxView: self, direction: direction)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        //let currentTouchPoint = scrollView.panGestureRecognizer.location(in: self)
         var direction = ParalloxDirection.up
-        print("content Offset : \(scrollView.contentOffset)")
-
         if scrollView.contentOffset.y <= 0 {
             direction = .down
+            if scrollView.contentOffset.y < previousPoint.y {
+                //direction = .up
+                //scrollView.setContentOffset(CGPoint(x:scrollView.contentOffset.x,y:0), animated: false)
+            }
+        } else if scrollView.contentOffset.y > 0 {
+            print("> 0 : \(scrollView.contentOffset.y) and previous : \(previousPoint.y)")
         }
+        
         let calculatedHeight = calculateNewValue(direction: direction, currentOffset: scrollView.contentOffset)
         previousPoint = scrollView.contentOffset
-        //decideScrollablity(view: scrollView, direction: direction)
         // Notify Holder
         // calculate percenteage
-        let percentage = (calculatedHeight.bodyViewHeight == 0) ? 0: (calculatedHeight.bodyViewHeight / bodyViewMaxValue)
-        self.delegate?.paralloxEffectProgress(paralloxView: self, progress: percentage, direction: direction)
+//        let percentage = (calculatedHeight.bodyViewHeight == 0) ? 0: (calculatedHeight.bodyViewHeight / bodyViewMaxValue)
+//        self.delegate?.paralloxEffectProgress(paralloxView: self, progress: percentage, direction: direction)
         // update body view top constraints
         updateBodyViewConstraints(newValue: calculatedHeight.bodyViewHeight)
         updateHeaderViewConstraints(newValue: calculatedHeight.headerViewHeight)
@@ -371,13 +392,13 @@ extension ParalloxView:UIScrollViewDelegate {
 
     }
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        var direction = ParalloxDirection.up
-        print("content Offset : \(scrollView.contentOffset)")
-        
-        if scrollView.contentOffset.y <= 0 {
-            direction = .down
-        }
-        self.delegate?.paralloxEffectEnded(paralloxView: self, direction: direction)
+        //let currentTouchPoint = scrollView.panGestureRecognizer.location(in: self)
+        previousPoint = scrollView.contentOffset
+//        var direction = ParalloxDirection.up
+//        if scrollView.contentOffset.y <= 0 {
+//            direction = .down
+//        }
+//        self.delegate?.paralloxEffectEnded(paralloxView: self, direction: direction)
     }
     
 }

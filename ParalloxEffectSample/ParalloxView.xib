@@ -23,23 +23,12 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZF0-9Q-Da7">
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="billgates" translatesAutoresizingMaskIntoConstraints="NO" id="5jr-jq-hZi"/>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bNW-PP-c8I">
-                            <fontDescription key="fontDescription" name="TamilSangamMN-Bold" family="Tamil Sangam MN" pointSize="31"/>
-                            <state key="normal" title="Send">
-                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="sendClicked:" destination="-1" eventType="touchUpInside" id="pqJ-MW-F4g"/>
-                            </connections>
-                        </button>
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="5jr-jq-hZi" secondAttribute="trailing" id="46I-iv-ukB"/>
-                        <constraint firstItem="bNW-PP-c8I" firstAttribute="centerX" secondItem="ZF0-9Q-Da7" secondAttribute="centerX" id="BLd-Ga-uPN"/>
                         <constraint firstAttribute="height" constant="247" id="Se7-13-k6i"/>
                         <constraint firstItem="5jr-jq-hZi" firstAttribute="leading" secondItem="ZF0-9Q-Da7" secondAttribute="leading" id="Snh-gZ-wr3"/>
                         <constraint firstAttribute="bottom" secondItem="5jr-jq-hZi" secondAttribute="bottom" id="aj7-bP-jk2"/>
-                        <constraint firstItem="bNW-PP-c8I" firstAttribute="centerY" secondItem="ZF0-9Q-Da7" secondAttribute="centerY" id="zKq-6h-ko9"/>
                         <constraint firstItem="5jr-jq-hZi" firstAttribute="top" secondItem="ZF0-9Q-Da7" secondAttribute="top" id="zr9-FI-IRy"/>
                     </constraints>
                 </view>
