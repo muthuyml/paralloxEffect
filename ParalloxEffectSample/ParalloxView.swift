@@ -37,8 +37,8 @@ class ParalloxView: UIView {
     // for touch location tracking
     fileprivate var previousPoint = CGPoint(x: 0, y: 0)
     // Min , Max Values for Top Constraints to restrict beyond that point
-    private var bodyViewMinValue = CGFloat(0)
-    private var headerViewMinValue = CGFloat(0)
+    fileprivate var bodyViewMinValue = CGFloat(0)
+    fileprivate var headerViewMinValue = CGFloat(0)
     fileprivate var bodyViewMaxValue = CGFloat(0) // be updated once constraints set
     fileprivate var headerViewMaxValue = CGFloat(0) // be updated once constraints set
     // delegate instance for notification
@@ -288,6 +288,14 @@ class ParalloxView: UIView {
         }
         return panDirection
     }
+    // Get Parallox direction
+    fileprivate func getParalloxDirection(currentOffset:CGPoint) -> ParalloxDirection{
+        var direction = ParalloxDirection.down
+        if previousPoint.y < currentOffset.y {
+            direction = .up
+        }
+        return direction
+    }
     
     private func getScaleFactorForYAxis(currentPoint:CGPoint) {
         // have to consider only y coordinate
@@ -357,7 +365,6 @@ extension ParalloxView:UIGestureRecognizerDelegate {
 extension ParalloxView:UIScrollViewDelegate {
     
     func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-        //let currentTouchPoint = scrollView.panGestureRecognizer.location(in: self)
         previousPoint = scrollView.contentOffset
 //        var direction = ParalloxDirection.up
 //        if scrollView.contentOffset.y <= 0 {
@@ -368,28 +375,36 @@ extension ParalloxView:UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         //let currentTouchPoint = scrollView.panGestureRecognizer.location(in: self)
-        var direction = ParalloxDirection.up
-        if scrollView.contentOffset.y <= 0 {
-            direction = .down
-            if scrollView.contentOffset.y < previousPoint.y {
-                //direction = .up
-                //scrollView.setContentOffset(CGPoint(x:scrollView.contentOffset.x,y:0), animated: false)
-            }
-        } else if scrollView.contentOffset.y > 0 {
-            print("> 0 : \(scrollView.contentOffset.y) and previous : \(previousPoint.y)")
+//        var direction = ParalloxDirection.up
+//        if scrollView.contentOffset.y <= 0 {
+//            direction = .down
+//            if scrollView.contentOffset.y < previousPoint.y {
+//                //direction = .up
+//                //scrollView.setContentOffset(CGPoint(x:scrollView.contentOffset.x,y:0), animated: false)
+//            }
+//        } else if scrollView.contentOffset.y > 0 {
+//            print("> 0 : \(scrollView.contentOffset.y) and previous : \(previousPoint.y)")
+//        }
+        let direction = getParalloxDirection(currentOffset: scrollView.contentOffset)
+        if (bodyViewTopConstraint.constant > bodyViewMinValue) && (direction == .up) {
+            let calculatedHeight = calculateNewValue(direction: direction, currentOffset: scrollView.contentOffset)
+            updateBodyViewConstraints(newValue: calculatedHeight.bodyViewHeight)
+            updateHeaderViewConstraints(newValue: calculatedHeight.headerViewHeight)
+            animateLayoutChanges()
+            scrollView.setContentOffset(CGPoint(x:scrollView.contentOffset.x,y:0), animated: false)
+        } else if (bodyViewTopConstraint.constant < bodyViewMaxValue) && (direction == .down) && (scrollView.contentOffset.y <= 0){
+            let calculatedHeight = calculateNewValue(direction: direction, currentOffset: scrollView.contentOffset)
+            updateBodyViewConstraints(newValue: calculatedHeight.bodyViewHeight)
+            updateHeaderViewConstraints(newValue: calculatedHeight.headerViewHeight)
+            animateLayoutChanges()
+            scrollView.setContentOffset(CGPoint(x:scrollView.contentOffset.x,y:0), animated: false)
         }
-        
-        let calculatedHeight = calculateNewValue(direction: direction, currentOffset: scrollView.contentOffset)
         previousPoint = scrollView.contentOffset
         // Notify Holder
         // calculate percenteage
 //        let percentage = (calculatedHeight.bodyViewHeight == 0) ? 0: (calculatedHeight.bodyViewHeight / bodyViewMaxValue)
 //        self.delegate?.paralloxEffectProgress(paralloxView: self, progress: percentage, direction: direction)
         // update body view top constraints
-        updateBodyViewConstraints(newValue: calculatedHeight.bodyViewHeight)
-        updateHeaderViewConstraints(newValue: calculatedHeight.headerViewHeight)
-        animateLayoutChanges()
-
     }
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         //let currentTouchPoint = scrollView.panGestureRecognizer.location(in: self)
