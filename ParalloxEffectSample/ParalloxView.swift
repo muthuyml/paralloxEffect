@@ -365,7 +365,7 @@ extension ParalloxView:UIGestureRecognizerDelegate {
 extension ParalloxView:UIScrollViewDelegate {
     
     func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-        previousPoint = scrollView.contentOffset
+        //previousPoint = scrollView.contentOffset
 //        var direction = ParalloxDirection.up
 //        if scrollView.contentOffset.y <= 0 {
 //            direction = .down
@@ -392,7 +392,7 @@ extension ParalloxView:UIScrollViewDelegate {
             updateHeaderViewConstraints(newValue: calculatedHeight.headerViewHeight)
             animateLayoutChanges()
             scrollView.setContentOffset(CGPoint(x:scrollView.contentOffset.x,y:0), animated: false)
-        } else if (bodyViewTopConstraint.constant < bodyViewMaxValue) && (direction == .down) && (scrollView.contentOffset.y <= 0){
+        } else if (bodyViewTopConstraint.constant <= bodyViewMaxValue) && (direction == .down) && (scrollView.contentOffset.y <= 0){
             let calculatedHeight = calculateNewValue(direction: direction, currentOffset: scrollView.contentOffset)
             updateBodyViewConstraints(newValue: calculatedHeight.bodyViewHeight)
             updateHeaderViewConstraints(newValue: calculatedHeight.headerViewHeight)
@@ -408,7 +408,7 @@ extension ParalloxView:UIScrollViewDelegate {
     }
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         //let currentTouchPoint = scrollView.panGestureRecognizer.location(in: self)
-        previousPoint = scrollView.contentOffset
+        //previousPoint = scrollView.contentOffset
 //        var direction = ParalloxDirection.up
 //        if scrollView.contentOffset.y <= 0 {
 //            direction = .down
