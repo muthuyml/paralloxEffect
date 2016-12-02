@@ -318,12 +318,14 @@ extension ParalloxView:UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let direction = getParalloxDirection(currentOffset: scrollView.contentOffset)
-        if (bodyViewTopConstraint.constant > bodyViewMinValue) && (direction == .up) {
+        if (bodyViewTopConstraint.constant > bodyViewMinValue) && (direction == .up) && (scrollView.contentOffset.y >= 0){
             updateSubViewsPosition(direction: direction, currentOffset: scrollView.contentOffset)
             scrollView.setContentOffset(CGPoint(x:scrollView.contentOffset.x,y:0), animated: false)
         } else if (bodyViewTopConstraint.constant <= bodyViewMaxValue) && (direction == .down) && (scrollView.contentOffset.y <= 0){
             updateSubViewsPosition(direction: direction, currentOffset: scrollView.contentOffset)
-            scrollView.setContentOffset(CGPoint(x:scrollView.contentOffset.x,y:0), animated: false)
+            if bodyViewTopConstraint.constant != bodyViewMaxValue {
+                scrollView.setContentOffset(CGPoint(x:scrollView.contentOffset.x,y:0), animated: false)
+            }
         }
         previousPoint = scrollView.contentOffset
         // Notify Holder
