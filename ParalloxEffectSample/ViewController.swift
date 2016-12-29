@@ -62,27 +62,8 @@ extension ViewController:UITableViewDelegate, UITableViewDataSource {
 }
 
 extension ViewController:UIScrollViewDelegate {
-	
-	func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-		//previousPoint = scrollView.contentOffset
-		//        var direction = ParalloxDirection.up
-		//        if scrollView.contentOffset.y <= 0 {
-		//            direction = .down
-		//        }
-		//        self.delegate?.paralloxEffectStarted(paralloxView: self, direction: direction)
-	}
-	
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
-		paralloxView?.scrollingHappening(scrollView: scrollView)
-	}
-	func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-		//let currentTouchPoint = scrollView.panGestureRecognizer.location(in: self)
-		//previousPoint = scrollView.contentOffset
-		//        var direction = ParalloxDirection.up
-		//        if scrollView.contentOffset.y <= 0 {
-		//            direction = .down
-		//        }
-		//        self.delegate?.paralloxEffectEnded(paralloxView: self, direction: direction)
+		paralloxView?.scrolled(scrollView: scrollView)
 	}
 	
 }
