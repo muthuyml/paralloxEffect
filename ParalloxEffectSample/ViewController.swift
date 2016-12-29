@@ -10,10 +10,16 @@ import UIKit
 
 class ViewController: UIViewController,ParalloxViewDelegate {
     @IBOutlet weak var paralloxView: ParalloxView!
+	@IBOutlet weak var imageView: UIImageView!
+	@IBOutlet weak var headerView: UIView!
+	@IBOutlet weak var tableview: UITableView!
+	
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         paralloxView.delegate = self
+		
+	    tableview.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,6 +32,7 @@ class ViewController: UIViewController,ParalloxViewDelegate {
     
     func paralloxEffectProgress(paralloxView: ParalloxView, progress: CGFloat, direction: ParalloxDirection) {
         print("percentage : \(progress*100)")
+		imageView.alpha = progress
     }
     
     func paralloxEffectEnded(paralloxView: ParalloxView, direction: ParalloxDirection) {
@@ -33,4 +40,51 @@ class ViewController: UIViewController,ParalloxViewDelegate {
     }
 
 }
+
+extension ViewController:UITableViewDelegate, UITableViewDataSource {
+	func numberOfSections(in tableView: UITableView) -> Int {
+		return 1
+	}
+	
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return 30
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+		cell.textLabel?.text = "test \(indexPath.row)"
+		return cell
+	}
+	
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		return 100
+	}
+}
+
+extension ViewController:UIScrollViewDelegate {
+	
+	func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+		//previousPoint = scrollView.contentOffset
+		//        var direction = ParalloxDirection.up
+		//        if scrollView.contentOffset.y <= 0 {
+		//            direction = .down
+		//        }
+		//        self.delegate?.paralloxEffectStarted(paralloxView: self, direction: direction)
+	}
+	
+	func scrollViewDidScroll(_ scrollView: UIScrollView) {
+		paralloxView?.scrollingHappening(scrollView: scrollView)
+	}
+	func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+		//let currentTouchPoint = scrollView.panGestureRecognizer.location(in: self)
+		//previousPoint = scrollView.contentOffset
+		//        var direction = ParalloxDirection.up
+		//        if scrollView.contentOffset.y <= 0 {
+		//            direction = .down
+		//        }
+		//        self.delegate?.paralloxEffectEnded(paralloxView: self, direction: direction)
+	}
+	
+}
+
 

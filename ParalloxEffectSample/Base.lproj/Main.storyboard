@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -19,7 +22,47 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ghN-TB-n0Q" customClass="ParalloxView" customModule="ParalloxEffectSample" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="emc-EA-YSM">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="241"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="billgates" translatesAutoresizingMaskIntoConstraints="NO" id="Eka-sl-nb0" customClass="bill">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="241"/>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="Eka-sl-nb0" firstAttribute="leading" secondItem="emc-EA-YSM" secondAttribute="leading" id="FVX-RI-jid"/>
+                                            <constraint firstItem="Eka-sl-nb0" firstAttribute="top" secondItem="emc-EA-YSM" secondAttribute="top" id="SD0-tq-vAH"/>
+                                            <constraint firstAttribute="trailing" secondItem="Eka-sl-nb0" secondAttribute="trailing" id="a2g-yM-i7d"/>
+                                            <constraint firstAttribute="height" constant="241" id="fGH-Ef-NQr"/>
+                                            <constraint firstAttribute="bottom" secondItem="Eka-sl-nb0" secondAttribute="bottom" id="nBJ-bK-lSc"/>
+                                        </constraints>
+                                    </view>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KJp-vj-YGi">
+                                        <rect key="frame" x="0.0" y="249" width="375" height="398"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="BYZ-38-t0r" id="hK4-eb-jdp"/>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="G1k-RW-wZ9"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="emc-EA-YSM" firstAttribute="leading" secondItem="ghN-TB-n0Q" secondAttribute="leading" id="C0r-vY-iTi"/>
+                                    <constraint firstItem="KJp-vj-YGi" firstAttribute="leading" secondItem="ghN-TB-n0Q" secondAttribute="leading" id="Eww-fX-vbu"/>
+                                    <constraint firstAttribute="bottom" secondItem="KJp-vj-YGi" secondAttribute="bottom" id="Mkz-N8-AxR"/>
+                                    <constraint firstItem="emc-EA-YSM" firstAttribute="top" secondItem="ghN-TB-n0Q" secondAttribute="top" id="NBp-T8-udy"/>
+                                    <constraint firstAttribute="trailing" secondItem="KJp-vj-YGi" secondAttribute="trailing" id="UTo-et-Nsk"/>
+                                    <constraint firstAttribute="trailing" secondItem="emc-EA-YSM" secondAttribute="trailing" id="a1G-bP-bNm"/>
+                                    <constraint firstItem="KJp-vj-YGi" firstAttribute="top" secondItem="ghN-TB-n0Q" secondAttribute="top" constant="249" id="i5H-lX-RS4"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="bodyViewTopConstraint" destination="i5H-lX-RS4" id="Ozu-y6-CpF"/>
+                                    <outlet property="headerViewHeight" destination="fGH-Ef-NQr" id="jRk-bu-oJT"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -31,7 +74,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="headerView" destination="emc-EA-YSM" id="uHV-V3-awb"/>
+                        <outlet property="imageView" destination="Eka-sl-nb0" id="mY7-kJ-IgI"/>
                         <outlet property="paralloxView" destination="ghN-TB-n0Q" id="Ubl-FM-ULi"/>
+                        <outlet property="tableview" destination="KJp-vj-YGi" id="cYy-JE-CUf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -39,4 +85,7 @@
             <point key="canvasLocation" x="117.59999999999999" y="123.68815592203899"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="billgates" width="60" height="60"/>
+    </resources>
 </document>
