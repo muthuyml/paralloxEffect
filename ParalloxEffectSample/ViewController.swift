@@ -19,6 +19,8 @@ class ViewController: UIViewController,ParalloxViewDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         paralloxView.delegate = self
 	    tableview.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+		self.automaticallyAdjustsScrollViewInsets = false
+		self.view.addGestureRecognizer(tableview.panGestureRecognizer)
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,7 +29,7 @@ class ViewController: UIViewController,ParalloxViewDelegate {
     }
 	
     func paralloxEffectProgress(paralloxView: ParalloxView, progress: CGFloat) {
-		imageView.alpha = (1-progress)
+		//imageView.alpha = (1-progress)
     }
 }
 
@@ -53,7 +55,6 @@ extension ViewController:UITableViewDelegate, UITableViewDataSource {
 
 extension ViewController:UIScrollViewDelegate {
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
-		debugPrint("Velocity : \(scrollView.panGestureRecognizer.velocity(in: self.view))")
 		paralloxView?.scrolled(scrollView: scrollView)
 	}
 	

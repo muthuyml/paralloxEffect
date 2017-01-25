@@ -95,14 +95,10 @@ class ParalloxView: UIView {
 	public func scrollDidStopped(scrollView:UIScrollView) {
 		let direction = getParalloxDirection(currentOffset: scrollView.contentOffset)
 		var calculatedHeight = calculateNewPosition(direction: direction, currentOffset: scrollView.contentOffset)
-		if calculatedHeight.bodyViewHeight > (bodyViewMaxValue*0.5){
+		if calculatedHeight.bodyViewHeight > bodyViewMaxValue{
 			calculatedHeight.bodyViewHeight = bodyViewMaxValue
 			calculatedHeight.headerViewHeight = headerViewMaxValue
-		} else {
-			calculatedHeight.bodyViewHeight = bodyViewMinValue
-			calculatedHeight.headerViewHeight = headerViewMinValue
 		}
-		
 		positionViews(at: calculatedHeight, animated: true)
 	}
 	
