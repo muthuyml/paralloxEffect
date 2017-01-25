@@ -79,7 +79,7 @@ class ParalloxView: UIView {
 			// calculate percentage and Send Notification
 			calculatePercentageAndSendEvent(calculatedHeight: calculatedHeight)
 			
-		} else if (bodyViewTopConstraint.constant < bodyViewMaxValue) && (direction == .down) && (scrollView.contentOffset.y <= 0){
+		} else if (direction == .down) && (scrollView.contentOffset.y <= 0){
 			// calculate duration
 			let duration = calculateDuration(with: velocity)
 			// update views position
@@ -139,14 +139,7 @@ class ParalloxView: UIView {
 		var calculatedHeaderViewHeight = CGFloat(0)
 		if  direction == .down {
 			calculatedTopConstraint = bodyViewTopConstraint.constant + difference
-			calculatedHeaderViewHeight = headerViewHeight.constant + (difference*0.5)
-//			if calculatedTopConstraint > bodyViewMaxValue {
-//				calculatedTopConstraint = bodyViewMaxValue
-//			}
-//			if calculatedHeaderViewHeight > headerViewMaxValue {
-//				calculatedHeaderViewHeight = headerViewMaxValue
-//			}
-			
+			calculatedHeaderViewHeight = headerViewHeight.constant + difference
 		} else {
 			calculatedTopConstraint = bodyViewTopConstraint.constant - difference
 			calculatedHeaderViewHeight = headerViewHeight.constant - (difference*0.5)
@@ -200,7 +193,7 @@ class ParalloxView: UIView {
 	private func updateSubViewsPosition(calculatedHeight:(headerViewHeight:CGFloat,bodyViewHeight:CGFloat),duration:Double) {
 		updateBodyViewConstraints(newValue: calculatedHeight.bodyViewHeight)
 		updateHeaderViewConstraints(newValue: calculatedHeight.headerViewHeight)
-		animateLayoutChanges(with: duration,animated: true)
+		animateLayoutChanges(with: duration,animated: false)
 	}
 }
 

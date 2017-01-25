@@ -27,11 +27,11 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="emc-EA-YSM">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="241"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="billgates" translatesAutoresizingMaskIntoConstraints="NO" id="Eka-sl-nb0">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="billgates" translatesAutoresizingMaskIntoConstraints="NO" id="Eka-sl-nb0">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="241"/>
                                             </imageView>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="0.23878357920000001" green="1" blue="0.34977518769999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="Eka-sl-nb0" firstAttribute="leading" secondItem="emc-EA-YSM" secondAttribute="leading" id="FVX-RI-jid"/>
                                             <constraint firstItem="Eka-sl-nb0" firstAttribute="top" secondItem="emc-EA-YSM" secondAttribute="top" id="SD0-tq-vAH"/>
@@ -42,7 +42,7 @@
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KJp-vj-YGi">
                                         <rect key="frame" x="0.0" y="249" width="375" height="398"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="0.65973633529999998" green="0.0095946807410000005" blue="0.20020610089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="dataSource" destination="BYZ-38-t0r" id="hK4-eb-jdp"/>
                                             <outlet property="delegate" destination="BYZ-38-t0r" id="G1k-RW-wZ9"/>
