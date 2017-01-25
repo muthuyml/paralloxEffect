@@ -93,7 +93,6 @@ class ParalloxView: UIView {
 	}
 	
 	public func scrollDidStopped(scrollView:UIScrollView) {
-
 		let direction = getParalloxDirection(currentOffset: scrollView.contentOffset)
 		var calculatedHeight = calculateNewPosition(direction: direction, currentOffset: scrollView.contentOffset)
 		if calculatedHeight.bodyViewHeight > (bodyViewMaxValue*0.5){
@@ -125,7 +124,7 @@ class ParalloxView: UIView {
 	}
 	
 	private func positionViews(at position:(headerViewHeight:CGFloat,bodyViewHeight:CGFloat), animated:Bool = true, duration:TimeInterval = 0.3){
-		updateSubViewsPosition(calculatedHeight: position,duration: duration)
+		updateSubViewsPosition(calculatedHeight: position,duration: duration,animated: animated)
 	}
 	/// calculate New Position
 	private func calculateNewPosition(direction:ParalloxDirection, currentOffset:CGPoint) -> (headerViewHeight:CGFloat,bodyViewHeight:CGFloat){
@@ -190,10 +189,10 @@ class ParalloxView: UIView {
 	}
 	
 	/// update view position
-	private func updateSubViewsPosition(calculatedHeight:(headerViewHeight:CGFloat,bodyViewHeight:CGFloat),duration:Double) {
+	private func updateSubViewsPosition(calculatedHeight:(headerViewHeight:CGFloat,bodyViewHeight:CGFloat),duration:Double,animated:Bool = false) {
 		updateBodyViewConstraints(newValue: calculatedHeight.bodyViewHeight)
 		updateHeaderViewConstraints(newValue: calculatedHeight.headerViewHeight)
-		animateLayoutChanges(with: duration,animated: false)
+		animateLayoutChanges(with: duration,animated: animated)
 	}
 }
 

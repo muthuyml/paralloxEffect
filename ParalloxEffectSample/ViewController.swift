@@ -56,6 +56,16 @@ extension ViewController:UIScrollViewDelegate {
 		debugPrint("Velocity : \(scrollView.panGestureRecognizer.velocity(in: self.view))")
 		paralloxView?.scrolled(scrollView: scrollView)
 	}
+	
+	func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+		paralloxView?.scrollDidStopped(scrollView: scrollView)
+	}
+	
+	func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+		if !decelerate {
+			paralloxView?.scrollDidStopped(scrollView: scrollView)
+		}
+	}
 }
 
 
