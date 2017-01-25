@@ -74,20 +74,18 @@ class ParalloxView: UIView {
 			let duration = calculateDuration(with: velocity)
 			// update views position
 			updateSubViewsPosition(calculatedHeight: calculatedHeight,duration: duration)
-			if bodyViewTopConstraint.constant != bodyViewMinValue {
-				scrollView.contentOffset = CGPoint(x:scrollView.contentOffset.x,y:0)
-			}
+			// set content offset to 0 to prevent scrolling
+			scrollView.contentOffset = CGPoint(x:scrollView.contentOffset.x,y:0)
 			// calculate percentage and Send Notification
 			calculatePercentageAndSendEvent(calculatedHeight: calculatedHeight)
 			
-		} else if (bodyViewTopConstraint.constant <= bodyViewMaxValue) && (direction == .down) && (scrollView.contentOffset.y <= 0){
+		} else if (bodyViewTopConstraint.constant < bodyViewMaxValue) && (direction == .down) && (scrollView.contentOffset.y <= 0){
 			// calculate duration
 			let duration = calculateDuration(with: velocity)
 			// update views position
 			updateSubViewsPosition(calculatedHeight: calculatedHeight,duration: duration)
-			if bodyViewTopConstraint.constant != bodyViewMaxValue {
-				scrollView.contentOffset = CGPoint(x:scrollView.contentOffset.x,y:0)
-			}
+			// set content offset to 0 to prevent scrolling
+			scrollView.contentOffset = CGPoint(x:scrollView.contentOffset.x,y:0)
 			// calculate percentage and Send Notification
 			calculatePercentageAndSendEvent(calculatedHeight: calculatedHeight)
 		}
@@ -142,12 +140,12 @@ class ParalloxView: UIView {
 		if  direction == .down {
 			calculatedTopConstraint = bodyViewTopConstraint.constant + difference
 			calculatedHeaderViewHeight = headerViewHeight.constant + (difference*0.5)
-			if calculatedTopConstraint > bodyViewMaxValue {
-				calculatedTopConstraint = bodyViewMaxValue
-			}
-			if calculatedHeaderViewHeight > headerViewMaxValue {
-				calculatedHeaderViewHeight = headerViewMaxValue
-			}
+//			if calculatedTopConstraint > bodyViewMaxValue {
+//				calculatedTopConstraint = bodyViewMaxValue
+//			}
+//			if calculatedHeaderViewHeight > headerViewMaxValue {
+//				calculatedHeaderViewHeight = headerViewMaxValue
+//			}
 			
 		} else {
 			calculatedTopConstraint = bodyViewTopConstraint.constant - difference
