@@ -18,7 +18,6 @@ class ViewController: UIViewController,ParalloxViewDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         paralloxView.delegate = self
-		
 	    tableview.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
 
@@ -26,19 +25,10 @@ class ViewController: UIViewController,ParalloxViewDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    func paralloxEffectStarted(paralloxView: ParalloxView, direction: ParalloxDirection) {
-        
+	
+    func paralloxEffectProgress(paralloxView: ParalloxView, progress: CGFloat) {
+		imageView.alpha = (1-progress)
     }
-    
-    func paralloxEffectProgress(paralloxView: ParalloxView, progress: CGFloat, direction: ParalloxDirection) {
-        print("percentage : \(progress*100)")
-		imageView.alpha = progress
-    }
-    
-    func paralloxEffectEnded(paralloxView: ParalloxView, direction: ParalloxDirection) {
-        
-    }
-
 }
 
 extension ViewController:UITableViewDelegate, UITableViewDataSource {
@@ -63,9 +53,9 @@ extension ViewController:UITableViewDelegate, UITableViewDataSource {
 
 extension ViewController:UIScrollViewDelegate {
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
+		debugPrint("Velocity : \(scrollView.panGestureRecognizer.velocity(in: self.view))")
 		paralloxView?.scrolled(scrollView: scrollView)
 	}
-	
 }
 
 
