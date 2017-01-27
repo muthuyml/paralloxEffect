@@ -68,7 +68,7 @@ class ParalloxView: UIView {
 			scrollView.contentOffset = CGPoint(x:scrollView.contentOffset.x,y:0)
 			// Place Views
 			placeViews(at: calculatedPosition,animated: false)
-		} else if (direction == .down) && (scrollView.contentOffset.y <= 0){
+		} else if (direction == .down) && (scrollView.contentOffset.y < 0){
 			// set content offset to 0 to prevent scrolling
 			scrollView.contentOffset = CGPoint(x:scrollView.contentOffset.x,y:0)
 			// Place Views
@@ -107,7 +107,7 @@ class ParalloxView: UIView {
 	///   - position: position to which the view to be placed
 	///   - animated: flag to indicate animated movement
 	///   - duration: duration in which animation happens
-	private func placeViews(at position:(headerViewHeight:CGFloat,bodyViewTopPosition:CGFloat), animated:Bool = true, duration:TimeInterval = 0.3){
+	private func placeViews(at position:(headerViewHeight:CGFloat,bodyViewTopPosition:CGFloat), animated:Bool = true, duration:TimeInterval = 0.2){
 		// update views position
 		updateSubViewsPosition(calculatedPosition: position,duration: duration,animated: animated)
 		// calculate percentage and Send Notification
