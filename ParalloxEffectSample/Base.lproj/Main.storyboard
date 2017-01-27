@@ -61,7 +61,7 @@
                                 </constraints>
                                 <connections>
                                     <outlet property="bodyViewTopConstraint" destination="i5H-lX-RS4" id="Ozu-y6-CpF"/>
-                                    <outlet property="headerViewHeight" destination="fGH-Ef-NQr" id="jRk-bu-oJT"/>
+                                    <outlet property="headerViewHeightConstraint" destination="fGH-Ef-NQr" id="YkS-qI-xTM"/>
                                 </connections>
                             </view>
                         </subviews>
