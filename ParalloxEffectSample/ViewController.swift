@@ -18,6 +18,7 @@ class ViewController: UIViewController,ParalloxViewDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         paralloxView.delegate = self
+		paralloxView.minTopPositionOfBodyView = CGFloat(64)
 	    tableview.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
 		self.automaticallyAdjustsScrollViewInsets = false
 		self.view.addGestureRecognizer(tableview.panGestureRecognizer)
@@ -29,7 +30,8 @@ class ViewController: UIViewController,ParalloxViewDelegate {
     }
 	
     func paralloxEffectProgress(paralloxView: ParalloxView, progress: CGFloat) {
-		//imageView.alpha = (1-progress)
+		debugPrint("percentage : \(progress)")
+		imageView.alpha = (1-progress)
     }
 }
 

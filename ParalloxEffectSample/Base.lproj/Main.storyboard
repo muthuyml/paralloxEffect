@@ -27,11 +27,10 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="emc-EA-YSM">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="241"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="billgates" translatesAutoresizingMaskIntoConstraints="NO" id="Eka-sl-nb0">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="billgates" translatesAutoresizingMaskIntoConstraints="NO" id="Eka-sl-nb0">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="241"/>
                                             </imageView>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.23878357920000001" green="1" blue="0.34977518769999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="Eka-sl-nb0" firstAttribute="leading" secondItem="emc-EA-YSM" secondAttribute="leading" id="FVX-RI-jid"/>
                                             <constraint firstItem="Eka-sl-nb0" firstAttribute="top" secondItem="emc-EA-YSM" secondAttribute="top" id="SD0-tq-vAH"/>
