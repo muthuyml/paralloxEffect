@@ -21,8 +21,8 @@ fileprivate enum ParalloxDirection {
 class ParalloxView: UIView {
 	
 	/// Animatable constraints
-	@IBOutlet weak var bodyViewTopConstraint: NSLayoutConstraint!
-	@IBOutlet weak var headerViewHeightConstraint: NSLayoutConstraint!
+	@IBOutlet weak var bodyViewTopConstraint: NSLayoutConstraint?
+	@IBOutlet weak var headerViewHeightConstraint: NSLayoutConstraint?
 	/// for touch location tracking
 	fileprivate var previousPoint = CGPoint(x: 0, y: 0)
 	/// Min , Max Values for Top Constraints to restrict beyond that point
@@ -40,15 +40,19 @@ class ParalloxView: UIView {
 		// initial value for contraint may be 500 set by Xcode byDefault
 		if maxTopPositionOfBodyView == 0 || maxTopPositionOfBodyView == 500 {
 			if let height = self.delegate?.customHeight?(for: self) {
-				bodyViewTopConstraint.constant = height
+				bodyViewTopConstraint?.constant = height
 			}
-			maxTopPositionOfBodyView = bodyViewTopConstraint.constant
+			if let bodyViewTop = bodyViewTopConstraint?.constant {
+				maxTopPositionOfBodyView = bodyViewTop
+			}
 		}
 		if maxHeightOfHeaderView == 0 || maxHeightOfHeaderView == 500 {
 			if let height = self.delegate?.customHeight?(for: self) {
-				headerViewHeightConstraint.constant = height
+				headerViewHeightConstraint?.constant = height
 			}
-			maxHeightOfHeaderView = headerViewHeightConstraint.constant
+			if let headerHeight = headerViewHeightConstraint?.constant {
+				maxHeightOfHeaderView = headerHeight
+			}
 		}
 	}
 	
@@ -59,7 +63,7 @@ class ParalloxView: UIView {
 	public func scrolled(scrollView:UIScrollView) {
 		let direction = getParalloxDirection(currentOffset: scrollView.contentOffset)
 		let calculatedPosition = calculateNewPosition(direction: direction, currentOffset: scrollView.contentOffset)
-		if (bodyViewTopConstraint.constant > minTopPositionOfBodyView) && (direction == .up) && (scrollView.contentOffset.y >= 0){
+		if ((bodyViewTopConstraint?.constant)! > minTopPositionOfBodyView) && (direction == .up) && (scrollView.contentOffset.y >= 0){
 			// update views position
 			updateSubViewsPosition(calculatedPosition: calculatedPosition)
 			// set content offset to 0 to prevent scrolling
@@ -87,7 +91,7 @@ class ParalloxView: UIView {
 			calculatedPosition.bodyViewTopPosition = maxTopPositionOfBodyView
 			calculatedPosition.headerViewHeight = maxHeightOfHeaderView
 		}
-		positionViews(at: calculatedPosition, animated: true)
+		placeViews(at: calculatedPosition, animated: true)
 	}
 	
 	// MARK: - Helpers
@@ -96,9 +100,9 @@ class ParalloxView: UIView {
 	///
 	/// - Parameter calculatedHeight: calculated Height Informations
 	private func calculatePercentageAndSendEvent(calculatedPosition:(headerViewHeight:CGFloat,bodyViewTopPosition:CGFloat)){
-		// calculate percenteage
-		let percentage = ((calculatedPosition.bodyViewTopPosition - minHeightOfHeaderView) / (maxTopPositionOfBodyView - minHeightOfHeaderView))
-		self.delegate?.paralloxEffectProgress(paralloxView: self, progress: (1-percentage))
+		// calculate percentage
+		let percentage = ((calculatedPosition.bodyViewTopPosition - minTopPositionOfBodyView) / maxTopPositionOfBodyView)
+		self.delegate?.paralloxEffectProgress(paralloxView: self, progress: percentage)
 	}
 	/// Place view at specified position
 	///
@@ -106,7 +110,7 @@ class ParalloxView: UIView {
 	///   - position: position to which the view to be placed
 	///   - animated: flag to indicate animated movement
 	///   - duration: duration in which animation happens
-	private func positionViews(at position:(headerViewHeight:CGFloat,bodyViewHeight:CGFloat), animated:Bool = true, duration:TimeInterval = 0.3){
+	private func placeViews(at position:(headerViewHeight:CGFloat,bodyViewTopPosition:CGFloat), animated:Bool = true, duration:TimeInterval = 0.3){
 		updateSubViewsPosition(calculatedPosition: position,duration: duration,animated: animated)
 	}
 	/// calculate New Position
@@ -120,12 +124,19 @@ class ParalloxView: UIView {
 		var calculatedTopConstraint = CGFloat(0)
 		var calculatedHeaderViewHeight = CGFloat(0)
 		if  direction == .down {
-			calculatedTopConstraint = bodyViewTopConstraint.constant + difference
-			calculatedHeaderViewHeight = headerViewHeightConstraint.constant + difference
-		} else {
-			calculatedTopConstraint = bodyViewTopConstraint.constant - difference
-			calculatedHeaderViewHeight = headerViewHeightConstraint.constant - (difference*0.5)
+			if let bodyViewTopValue = bodyViewTopConstraint?.constant,
+				let headerViewHeightValue = headerViewHeightConstraint?.constant {
+				calculatedTopConstraint =  bodyViewTopValue + difference
+				calculatedHeaderViewHeight =  headerViewHeightValue + difference
+			}
 			
+		} else {
+			
+			if let bodyViewTopValue = bodyViewTopConstraint?.constant,
+				let headerViewHeightValue = headerViewHeightConstraint?.constant {
+				calculatedTopConstraint = bodyViewTopValue - difference
+				calculatedHeaderViewHeight = headerViewHeightValue - (difference*0.5)
+			}
 			if calculatedTopConstraint < minTopPositionOfBodyView {
 				calculatedTopConstraint = minTopPositionOfBodyView
 			}
@@ -149,14 +160,14 @@ class ParalloxView: UIView {
 	///
 	/// - Parameter newValue: newValue to be updated  000
 	private func updateBodyViewConstraints(newValue:CGFloat) {
-		bodyViewTopConstraint.constant = newValue
+		bodyViewTopConstraint?.constant = newValue
 	}
 	
 	/// Update Header view height
 	///
 	/// - Parameter newValue: newValue to be updated
 	private func updateHeaderViewConstraints(newValue:CGFloat) {
-		headerViewHeightConstraint.constant = newValue
+		headerViewHeightConstraint?.constant = newValue
 	}
 	
 	/// Layout the views with animation

@@ -31,7 +31,7 @@ class ViewController: UIViewController,ParalloxViewDelegate {
 	
     func paralloxEffectProgress(paralloxView: ParalloxView, progress: CGFloat) {
 		debugPrint("percentage : \(progress)")
-		imageView.alpha = (1-progress)
+		imageView.alpha = progress
     }
 }
 
