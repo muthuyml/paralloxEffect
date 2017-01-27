@@ -34,15 +34,6 @@ class ParalloxView: UIView {
 	/// delegate instance for notification
 	public weak var delegate:ParalloxViewDelegate?
 	
-	//MARK: - initializers
-	override init(frame: CGRect) {
-		super.init(frame: frame)
-	}
-	
-	required init?(coder aDecoder: NSCoder) {
-		super.init(coder: aDecoder)
-	}
-	
 	//MARK: - Override methods
 	override func layoutSubviews() {
 		super.layoutSubviews()
