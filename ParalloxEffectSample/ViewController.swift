@@ -13,12 +13,13 @@ class ViewController: UIViewController,ParalloxViewDelegate {
 	@IBOutlet weak var imageView: UIImageView!
 	@IBOutlet weak var headerView: UIView!
 	@IBOutlet weak var tableview: UITableView!
+	@IBOutlet weak var titleLabel: UILabel!
 	
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         paralloxView.delegate = self
-		paralloxView.minTopPositionOfBodyView = CGFloat(100)
+		paralloxView.minTopPositionOfBodyView = CGFloat(64)
 	    tableview.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
 		self.automaticallyAdjustsScrollViewInsets = false
 		self.view.addGestureRecognizer(tableview.panGestureRecognizer)
@@ -32,6 +33,8 @@ class ViewController: UIViewController,ParalloxViewDelegate {
     func paralloxEffectProgress(paralloxView: ParalloxView, progress: CGFloat) {
 		debugPrint("percentage : \(progress)")
 		imageView.alpha = progress
+		let font = 20*progress
+		titleLabel.font = UIFont.systemFont(ofSize: font)
     }
 	
 	func customHeight(for ParalloxView: ParalloxView) -> CGFloat {
