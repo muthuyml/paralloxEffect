@@ -79,10 +79,10 @@ class ParalloxView: UIView {
 	
 	/// Method to be called after scrolling stops to place view in required place
 	/// @discuission, best place to be called in scrollviewDidEndDragging,ScrollviewDidEndDecelarate
-	/// - Parameter scrollView: scrollViewInstance
-	public func scrollDidStopped(scrollView:UIScrollView) {
-		let direction = getParalloxDirection(currentOffset: scrollView.contentOffset)
-		var calculatedHeight = calculateNewPosition(direction: direction, currentOffset: scrollView.contentOffset)
+	/// - Parameter offSet: current offSet of scrollview
+	public func scrollDidStopped(at offSet:CGPoint) {
+		let direction = getParalloxDirection(currentOffset: offSet)
+		var calculatedHeight = calculateNewPosition(direction: direction, currentOffset: offSet)
 		if calculatedHeight.bodyViewHeight > maxTopPositionOfBodyView{
 			calculatedHeight.bodyViewHeight = maxTopPositionOfBodyView
 			calculatedHeight.headerViewHeight = maxHeightOfHeaderView
