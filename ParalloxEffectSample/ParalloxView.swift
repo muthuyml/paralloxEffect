@@ -25,6 +25,7 @@ class ParalloxView: UIView {
 	@IBOutlet weak var headerViewHeightConstraint: NSLayoutConstraint?
 	/// for touch location tracking
 	fileprivate var previousPoint = CGPoint(x: 0, y: 0)
+	fileprivate var currentVelocity = CGPoint(x: 0, y: 0)
 	/// Min , Max Values for Top Constraints to restrict beyond that point
 	/// Body view min value, exposed, will be set by external classes
 	var minTopPositionOfBodyView = CGFloat(0)
@@ -61,6 +62,8 @@ class ParalloxView: UIView {
 	///
 	/// - Parameter scrollView: scrollview of which scrolling handled
 	public func scrolled(scrollView:UIScrollView) {
+		// storing velocity for future reference
+		currentVelocity = scrollView.panGestureRecognizer.velocity(in: self)
 		let direction = getParalloxDirection(currentOffset: scrollView.contentOffset)
 		let calculatedPosition = calculateNewPosition(direction: direction, currentOffset: scrollView.contentOffset)
 		if ((bodyViewTopConstraint?.constant)! > minTopPositionOfBodyView) && (direction == .up) && (scrollView.contentOffset.y >= 0){
@@ -68,9 +71,9 @@ class ParalloxView: UIView {
 			scrollView.contentOffset = CGPoint(x:scrollView.contentOffset.x,y:0)
 			// Place Views
 			placeViews(at: calculatedPosition,animated: false)
-		} else if (direction == .down) && (scrollView.contentOffset.y < 0){
+		} else if (direction == .down) && (scrollView.contentOffset.y <= 0){
 			// set content offset to 0 to prevent scrolling
-			scrollView.contentOffset = CGPoint(x:scrollView.contentOffset.x,y:0)
+			//scrollView.contentOffset = CGPoint(x:scrollView.contentOffset.x,y:0)
 			// Place Views
 			placeViews(at: calculatedPosition,animated: false)
 		}
