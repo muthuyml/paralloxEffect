@@ -98,7 +98,7 @@ class ParalloxView: UIView {
 	/// - Parameter calculatedHeight: calculated Height Informations
 	private func calculatePercentageAndSendEvent(calculatedPosition:(headerViewHeight:CGFloat,bodyViewTopPosition:CGFloat)){
 		// calculate percentage
-		let percentage = ((calculatedPosition.bodyViewTopPosition - minTopPositionOfBodyView) / maxTopPositionOfBodyView)
+		let percentage = (maxTopPositionOfBodyView != calculatedPosition.bodyViewTopPosition) ? ((calculatedPosition.bodyViewTopPosition - minTopPositionOfBodyView) / maxTopPositionOfBodyView):1
 		self.delegate?.paralloxEffectProgress(paralloxView: self, progress: percentage)
 	}
 	/// Place view at specified position
