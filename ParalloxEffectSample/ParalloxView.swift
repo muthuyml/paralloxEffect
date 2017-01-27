@@ -64,19 +64,15 @@ class ParalloxView: UIView {
 		let direction = getParalloxDirection(currentOffset: scrollView.contentOffset)
 		let calculatedPosition = calculateNewPosition(direction: direction, currentOffset: scrollView.contentOffset)
 		if ((bodyViewTopConstraint?.constant)! > minTopPositionOfBodyView) && (direction == .up) && (scrollView.contentOffset.y >= 0){
-			// update views position
-			updateSubViewsPosition(calculatedPosition: calculatedPosition)
 			// set content offset to 0 to prevent scrolling
 			scrollView.contentOffset = CGPoint(x:scrollView.contentOffset.x,y:0)
-			// calculate percentage and Send Notification
-			calculatePercentageAndSendEvent(calculatedPosition: calculatedPosition)
+			// Place Views
+			placeViews(at: calculatedPosition,animated: false)
 		} else if (direction == .down) && (scrollView.contentOffset.y <= 0){
-			// update views position
-			updateSubViewsPosition(calculatedPosition: calculatedPosition)
 			// set content offset to 0 to prevent scrolling
 			scrollView.contentOffset = CGPoint(x:scrollView.contentOffset.x,y:0)
-			// calculate percentage and Send Notification
-			calculatePercentageAndSendEvent(calculatedPosition: calculatedPosition)
+			// Place Views
+			placeViews(at: calculatedPosition,animated: false)
 		}
 		previousPoint = scrollView.contentOffset
 	}
@@ -91,6 +87,7 @@ class ParalloxView: UIView {
 			calculatedPosition.bodyViewTopPosition = maxTopPositionOfBodyView
 			calculatedPosition.headerViewHeight = maxHeightOfHeaderView
 		}
+		// Place Views
 		placeViews(at: calculatedPosition, animated: true)
 	}
 	
@@ -111,7 +108,10 @@ class ParalloxView: UIView {
 	///   - animated: flag to indicate animated movement
 	///   - duration: duration in which animation happens
 	private func placeViews(at position:(headerViewHeight:CGFloat,bodyViewTopPosition:CGFloat), animated:Bool = true, duration:TimeInterval = 0.3){
+		// update views position
 		updateSubViewsPosition(calculatedPosition: position,duration: duration,animated: animated)
+		// calculate percentage and Send Notification
+		calculatePercentageAndSendEvent(calculatedPosition: position)
 	}
 	/// calculate New Position
 	private func calculateNewPosition(direction:ParalloxDirection, currentOffset:CGPoint) -> (headerViewHeight:CGFloat,bodyViewTopPosition:CGFloat){
