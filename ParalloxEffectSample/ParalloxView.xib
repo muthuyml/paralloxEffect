@@ -3,16 +3,15 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ParalloxView" customModule="ParalloxEffectSample" customModuleProvider="target">
             <connections>
-                <outlet property="bodyViewTopConstraint" destination="NWd-Hm-Ici" id="Qyz-Vz-sWz"/>
+                <outlet property="bodyViewTopConstraint" destination="NCb-ds-wRM" id="orw-Re-4jE"/>
                 <outlet property="contentContainerView" destination="iN0-l3-epB" id="7me-X4-STT"/>
                 <outlet property="headerView" destination="ZF0-9Q-Da7" id="gOW-bq-SRA"/>
-                <outlet property="headerViewHeight" destination="4OW-Ef-WDI" id="kvy-S9-uPk"/>
+                <outlet property="headerViewHeight" destination="Se7-13-k6i" id="cEH-Na-qRa"/>
                 <outlet property="tableview" destination="IgP-2O-OuD" id="fg4-ab-Z58"/>
             </connections>
         </placeholder>
@@ -23,25 +22,14 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZF0-9Q-Da7">
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="billgates" translatesAutoresizingMaskIntoConstraints="NO" id="5jr-jq-hZi"/>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bNW-PP-c8I">
-                            <fontDescription key="fontDescription" name="TamilSangamMN-Bold" family="Tamil Sangam MN" pointSize="31"/>
-                            <state key="normal" title="Send">
-                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="sendClicked:" destination="-1" eventType="touchUpInside" id="pqJ-MW-F4g"/>
-                            </connections>
-                        </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="billgates" translatesAutoresizingMaskIntoConstraints="NO" id="5jr-jq-hZi"/>
                     </subviews>
-                    <color key="backgroundColor" red="0.23878357920000001" green="1" blue="0.34977518769999999" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstItem="5jr-jq-hZi" firstAttribute="top" secondItem="ZF0-9Q-Da7" secondAttribute="top" id="Lev-dO-DCP"/>
-                        <constraint firstItem="bNW-PP-c8I" firstAttribute="centerY" secondItem="ZF0-9Q-Da7" secondAttribute="centerY" id="MaB-eC-hlr"/>
-                        <constraint firstItem="bNW-PP-c8I" firstAttribute="centerX" secondItem="ZF0-9Q-Da7" secondAttribute="centerX" id="TG4-Y2-vXy"/>
-                        <constraint firstAttribute="trailing" secondItem="5jr-jq-hZi" secondAttribute="trailing" id="U63-mh-obc"/>
-                        <constraint firstAttribute="bottom" secondItem="5jr-jq-hZi" secondAttribute="bottom" id="Yyr-zv-oWT"/>
-                        <constraint firstItem="5jr-jq-hZi" firstAttribute="leading" secondItem="ZF0-9Q-Da7" secondAttribute="leading" id="s27-i6-lIl"/>
+                        <constraint firstAttribute="trailing" secondItem="5jr-jq-hZi" secondAttribute="trailing" id="46I-iv-ukB"/>
+                        <constraint firstAttribute="height" constant="247" id="Se7-13-k6i"/>
+                        <constraint firstItem="5jr-jq-hZi" firstAttribute="leading" secondItem="ZF0-9Q-Da7" secondAttribute="leading" id="Snh-gZ-wr3"/>
+                        <constraint firstAttribute="bottom" secondItem="5jr-jq-hZi" secondAttribute="bottom" id="aj7-bP-jk2"/>
+                        <constraint firstItem="5jr-jq-hZi" firstAttribute="top" secondItem="ZF0-9Q-Da7" secondAttribute="top" id="zr9-FI-IRy"/>
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="IgP-2O-OuD">
@@ -55,14 +43,13 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <gestureRecognizers/>
             <constraints>
-                <constraint firstItem="ZF0-9Q-Da7" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.37" id="4OW-Ef-WDI"/>
-                <constraint firstItem="ZF0-9Q-Da7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="B2r-DD-A2M"/>
-                <constraint firstAttribute="bottom" secondItem="IgP-2O-OuD" secondAttribute="bottom" id="BCv-Mj-wwZ"/>
-                <constraint firstItem="IgP-2O-OuD" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="249" id="NWd-Hm-Ici"/>
-                <constraint firstItem="IgP-2O-OuD" firstAttribute="leading" secondItem="ZF0-9Q-Da7" secondAttribute="leading" id="O4k-LP-cur"/>
-                <constraint firstAttribute="trailing" secondItem="ZF0-9Q-Da7" secondAttribute="trailing" id="dZz-wV-wA0"/>
-                <constraint firstItem="IgP-2O-OuD" firstAttribute="trailing" secondItem="ZF0-9Q-Da7" secondAttribute="trailing" id="iQq-XE-GKg"/>
-                <constraint firstItem="ZF0-9Q-Da7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="z9b-eJ-18p"/>
+                <constraint firstAttribute="trailing" secondItem="ZF0-9Q-Da7" secondAttribute="trailing" id="0xs-6J-Ubs"/>
+                <constraint firstAttribute="trailing" secondItem="IgP-2O-OuD" secondAttribute="trailing" id="2aT-zz-Vmb"/>
+                <constraint firstItem="IgP-2O-OuD" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="DI4-AG-vhp"/>
+                <constraint firstItem="ZF0-9Q-Da7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="K2l-Fx-EKH"/>
+                <constraint firstItem="IgP-2O-OuD" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="247" id="NCb-ds-wRM"/>
+                <constraint firstItem="ZF0-9Q-Da7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="QBH-37-GFf"/>
+                <constraint firstAttribute="bottom" secondItem="IgP-2O-OuD" secondAttribute="bottom" id="e91-RU-eDQ"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <connections>

@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -19,7 +22,54 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ghN-TB-n0Q" customClass="ParalloxView" customModule="ParalloxEffectSample" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="emc-EA-YSM">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="241"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="billgates" translatesAutoresizingMaskIntoConstraints="NO" id="Eka-sl-nb0">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="241"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FNw-2n-SED">
+                                                <rect key="frame" x="188" y="121" width="0.0" height="0.0"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="Eka-sl-nb0" firstAttribute="leading" secondItem="emc-EA-YSM" secondAttribute="leading" id="FVX-RI-jid"/>
+                                            <constraint firstItem="Eka-sl-nb0" firstAttribute="top" secondItem="emc-EA-YSM" secondAttribute="top" id="SD0-tq-vAH"/>
+                                            <constraint firstAttribute="trailing" secondItem="Eka-sl-nb0" secondAttribute="trailing" id="a2g-yM-i7d"/>
+                                            <constraint firstItem="FNw-2n-SED" firstAttribute="centerY" secondItem="emc-EA-YSM" secondAttribute="centerY" id="a7F-tN-LL9"/>
+                                            <constraint firstAttribute="height" constant="241" id="fGH-Ef-NQr"/>
+                                            <constraint firstItem="FNw-2n-SED" firstAttribute="centerX" secondItem="emc-EA-YSM" secondAttribute="centerX" id="iLy-kC-PYh"/>
+                                            <constraint firstAttribute="bottom" secondItem="Eka-sl-nb0" secondAttribute="bottom" id="nBJ-bK-lSc"/>
+                                        </constraints>
+                                    </view>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KJp-vj-YGi">
+                                        <rect key="frame" x="0.0" y="249" width="375" height="418"/>
+                                        <color key="backgroundColor" red="0.65973633529999998" green="0.0095946807410000005" blue="0.20020610089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="BYZ-38-t0r" id="hK4-eb-jdp"/>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="G1k-RW-wZ9"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="emc-EA-YSM" firstAttribute="leading" secondItem="ghN-TB-n0Q" secondAttribute="leading" id="C0r-vY-iTi"/>
+                                    <constraint firstItem="KJp-vj-YGi" firstAttribute="leading" secondItem="ghN-TB-n0Q" secondAttribute="leading" id="Eww-fX-vbu"/>
+                                    <constraint firstAttribute="bottom" secondItem="KJp-vj-YGi" secondAttribute="bottom" id="Mkz-N8-AxR"/>
+                                    <constraint firstItem="emc-EA-YSM" firstAttribute="top" secondItem="ghN-TB-n0Q" secondAttribute="top" id="NBp-T8-udy"/>
+                                    <constraint firstAttribute="trailing" secondItem="KJp-vj-YGi" secondAttribute="trailing" id="UTo-et-Nsk"/>
+                                    <constraint firstAttribute="trailing" secondItem="emc-EA-YSM" secondAttribute="trailing" id="a1G-bP-bNm"/>
+                                    <constraint firstItem="KJp-vj-YGi" firstAttribute="top" secondItem="ghN-TB-n0Q" secondAttribute="top" constant="249" id="i5H-lX-RS4"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="bodyViewTopConstraint" destination="i5H-lX-RS4" id="Ozu-y6-CpF"/>
+                                    <outlet property="headerViewHeightConstraint" destination="fGH-Ef-NQr" id="YkS-qI-xTM"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -30,10 +80,21 @@
                             <constraint firstItem="ghN-TB-n0Q" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="zAN-Id-yVw"/>
                         </constraints>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="headerView" destination="emc-EA-YSM" id="uHV-V3-awb"/>
+                        <outlet property="imageView" destination="Eka-sl-nb0" id="mY7-kJ-IgI"/>
+                        <outlet property="paralloxView" destination="ghN-TB-n0Q" id="Ubl-FM-ULi"/>
+                        <outlet property="tableview" destination="KJp-vj-YGi" id="cYy-JE-CUf"/>
+                        <outlet property="titleLabel" destination="FNw-2n-SED" id="c5c-ba-8FA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="117.59999999999999" y="123.68815592203899"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="billgates" width="60" height="60"/>
+    </resources>
 </document>
