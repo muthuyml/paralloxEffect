@@ -69,12 +69,12 @@ extension ViewController:UIScrollViewDelegate {
 	}
 	
 	func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-		paralloxView?.scrollDidStopped(at: scrollView.contentOffset)
+		paralloxView?.scrollDidStopped(scrollView: scrollView)
 	}
 	
 	func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
 		if !decelerate {
-			paralloxView?.scrollDidStopped(at: scrollView.contentOffset)
+			paralloxView?.scrollDidStopped(scrollView: scrollView)
 		}
 	}
 }

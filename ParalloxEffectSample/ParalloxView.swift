@@ -69,8 +69,11 @@ class ParalloxView: UIView {
 			// Place Views
 			placeViews(at: calculatedPosition,animated: false)
 		} else if (direction == .down) && (scrollView.contentOffset.y < 0){
-			// set content offset to 0 to prevent scrolling
-			scrollView.contentOffset = CGPoint(x:scrollView.contentOffset.x,y:0)
+            let velocity = scrollView.panGestureRecognizer.velocity(in: self)
+            if velocity.y == 0 {
+                // set content offset to 0 to prevent scrolling
+                scrollView.contentOffset = CGPoint(x:scrollView.contentOffset.x,y:0)
+            }
 			// Place Views
 			placeViews(at: calculatedPosition,animated: false)
 		}
@@ -80,15 +83,15 @@ class ParalloxView: UIView {
 	/// Method to be called after scrolling stops to place view in required place
 	/// @discuission, best place to be called in scrollviewDidEndDragging,ScrollviewDidEndDecelarate
 	/// - Parameter offSet: current offSet of scrollview
-	public func scrollDidStopped(at offSet:CGPoint) {
-		let direction = getParalloxDirection(currentOffset: offSet)
-		var calculatedPosition = calculateNewPosition(direction: direction, currentOffset: offSet)
+	public func scrollDidStopped(scrollView:UIScrollView) {
+		let direction = getParalloxDirection(currentOffset: scrollView.contentOffset)
+		var calculatedPosition = calculateNewPosition(direction: direction, currentOffset: scrollView.contentOffset)
 		if calculatedPosition.bodyViewTopPosition > maxTopPositionOfBodyView{
 			calculatedPosition.bodyViewTopPosition = maxTopPositionOfBodyView
 			calculatedPosition.headerViewHeight = maxHeightOfHeaderView
-		}
-		// Place Views
-		placeViews(at: calculatedPosition, animated: true)
+        }
+        // Place Views
+        placeViews(at: calculatedPosition, animated: true)		
 	}
 	
 	// MARK: - Helpers
