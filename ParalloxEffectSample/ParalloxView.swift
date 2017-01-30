@@ -82,16 +82,17 @@ class ParalloxView: UIView {
 	/// - Parameter offSet: current offSet of scrollview
 	public func scrollDidStopped(scrollView:UIScrollView) {
 		let direction = getParalloxDirection(currentOffset: scrollView.contentOffset)
-		var duration = 0.1 // default duration
+		var duration = 0.2 // default duration
 		var calculatedPosition = calculateNewPosition(direction: direction, currentOffset: scrollView.contentOffset)
 		let velocity = scrollView.panGestureRecognizer.velocity(in: self)
-		if velocity.y > maxTopPositionOfBodyView{
+		if velocity.y > maxTopPositionOfBodyView {
 			let difference = abs(maxTopPositionOfBodyView - velocity.y)
 			calculatedPosition.bodyViewTopPosition += (difference*2)
 			calculatedPosition.headerViewHeight += difference
 			if Double(velocity.y / self.frame.maxY) < duration {
 				duration = Double(self.frame.maxY / velocity.y)
 			}
+			duration = 0.1 // make it faster
 		}
 		if calculatedPosition.bodyViewTopPosition > maxTopPositionOfBodyView{
 			calculatedPosition.bodyViewTopPosition = maxTopPositionOfBodyView
@@ -132,15 +133,14 @@ class ParalloxView: UIView {
 		// calculate Header Height & Body Top constraint based on direction of scrolling
 		var calculatedTopConstraint = CGFloat(0)
 		var calculatedHeaderViewHeight = CGFloat(0)
-		if  direction == .down {
+		if  direction == .down { // pulling down
 			if let bodyViewTopValue = bodyViewTopConstraint?.constant,
 				let headerViewHeightValue = headerViewHeightConstraint?.constant {
 				calculatedTopConstraint =  bodyViewTopValue + difference
 				calculatedHeaderViewHeight =  headerViewHeightValue + difference
 			}
 			
-		} else {
-			
+		} else { // pushing up
 			if let bodyViewTopValue = bodyViewTopConstraint?.constant,
 				let headerViewHeightValue = headerViewHeightConstraint?.constant {
 				calculatedTopConstraint = bodyViewTopValue - difference
@@ -182,12 +182,12 @@ class ParalloxView: UIView {
 	/// Layout the views with animation
 	private func performLayoutChanges(with duration:Double = 0.0, animated:Bool = false) {
 		if animated {
-			UIView.animate(withDuration: duration, animations: { 
+			UIView.animate(withDuration: duration, animations: {
 				self.layoutIfNeeded()
 			})
-//			UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 5.0, options: .curveLinear, animations: { 
-//				self.layoutIfNeeded()
-//			}, completion: nil)
+			//			UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 5.0, options: .curveLinear, animations: {
+			//				self.layoutIfNeeded()
+			//			}, completion: nil)
 		} else {
 			self.layoutIfNeeded()
 		}
