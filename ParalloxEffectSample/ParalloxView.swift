@@ -82,19 +82,23 @@ class ParalloxView: UIView {
 	/// - Parameter offSet: current offSet of scrollview
 	public func scrollDidStopped(scrollView:UIScrollView) {
 		let direction = getParalloxDirection(currentOffset: scrollView.contentOffset)
+		var duration = 0.1 // default duration
 		var calculatedPosition = calculateNewPosition(direction: direction, currentOffset: scrollView.contentOffset)
 		let velocity = scrollView.panGestureRecognizer.velocity(in: self)
 		if velocity.y > maxTopPositionOfBodyView{
 			let difference = abs(maxTopPositionOfBodyView - velocity.y)
 			calculatedPosition.bodyViewTopPosition += (difference*2)
 			calculatedPosition.headerViewHeight += difference
+			if Double(velocity.y / self.frame.maxY) < duration {
+				duration = Double(self.frame.maxY / velocity.y)
+			}
 		}
 		if calculatedPosition.bodyViewTopPosition > maxTopPositionOfBodyView{
 			calculatedPosition.bodyViewTopPosition = maxTopPositionOfBodyView
 			calculatedPosition.headerViewHeight = maxHeightOfHeaderView
 		}
 		// Place Views
-		placeViews(at: calculatedPosition, animated: true)
+		placeViews(at: calculatedPosition, animated: true,duration: duration)
 	}
 	
 	// MARK: - Helpers
