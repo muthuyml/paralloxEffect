@@ -69,11 +69,8 @@ class ParalloxView: UIView {
 			// Place Views
 			placeViews(at: calculatedPosition,animated: false)
 		} else if (direction == .down) && (scrollView.contentOffset.y < 0){
-            let velocity = scrollView.panGestureRecognizer.velocity(in: self)
-            if velocity.y == 0 {
-                // set content offset to 0 to prevent scrolling
-                scrollView.contentOffset = CGPoint(x:scrollView.contentOffset.x,y:0)
-            }
+			// set content offset to 0 to prevent scrolling
+			scrollView.contentOffset = CGPoint(x:scrollView.contentOffset.x,y:0)
 			// Place Views
 			placeViews(at: calculatedPosition,animated: false)
 		}
@@ -86,12 +83,18 @@ class ParalloxView: UIView {
 	public func scrollDidStopped(scrollView:UIScrollView) {
 		let direction = getParalloxDirection(currentOffset: scrollView.contentOffset)
 		var calculatedPosition = calculateNewPosition(direction: direction, currentOffset: scrollView.contentOffset)
+		let velocity = scrollView.panGestureRecognizer.velocity(in: self)
+		if velocity.y > maxTopPositionOfBodyView{
+			let difference = abs(maxTopPositionOfBodyView - velocity.y)
+			calculatedPosition.bodyViewTopPosition += (difference*2)
+			calculatedPosition.headerViewHeight += difference
+		}
 		if calculatedPosition.bodyViewTopPosition > maxTopPositionOfBodyView{
 			calculatedPosition.bodyViewTopPosition = maxTopPositionOfBodyView
 			calculatedPosition.headerViewHeight = maxHeightOfHeaderView
-        }
-        // Place Views
-        placeViews(at: calculatedPosition, animated: true)		
+		}
+		// Place Views
+		placeViews(at: calculatedPosition, animated: true)
 	}
 	
 	// MARK: - Helpers
@@ -100,9 +103,8 @@ class ParalloxView: UIView {
 	///
 	/// - Parameter calculatedHeight: calculated Height Informations
 	private func calculatePercentageAndSendEvent(calculatedPosition:(headerViewHeight:CGFloat,bodyViewTopPosition:CGFloat)){
-		// calculate percentage
-		let percentage = (maxTopPositionOfBodyView != calculatedPosition.bodyViewTopPosition) ? ((calculatedPosition.bodyViewTopPosition - minTopPositionOfBodyView) / maxTopPositionOfBodyView):1
-		self.delegate?.paralloxEffectProgress(paralloxView: self, progress: percentage)
+		let percentage = (calculatedPosition.bodyViewTopPosition == minTopPositionOfBodyView) ? 0: (calculatedPosition.bodyViewTopPosition / maxTopPositionOfBodyView)
+		self.delegate?.paralloxEffectProgress(paralloxView: self, progress: (1-percentage))
 	}
 	/// Place view at specified position
 	///
@@ -110,7 +112,7 @@ class ParalloxView: UIView {
 	///   - position: position to which the view to be placed
 	///   - animated: flag to indicate animated movement
 	///   - duration: duration in which animation happens
-	private func placeViews(at position:(headerViewHeight:CGFloat,bodyViewTopPosition:CGFloat), animated:Bool = true, duration:TimeInterval = 0.2){
+	private func placeViews(at position:(headerViewHeight:CGFloat,bodyViewTopPosition:CGFloat), animated:Bool = true, duration:TimeInterval = 0.3){
 		// update views position
 		updateSubViewsPosition(calculatedPosition: position,duration: duration,animated: animated)
 		// calculate percentage and Send Notification
@@ -176,9 +178,12 @@ class ParalloxView: UIView {
 	/// Layout the views with animation
 	private func performLayoutChanges(with duration:Double = 0.0, animated:Bool = false) {
 		if animated {
-			UIView.animate(withDuration: duration) {
+			UIView.animate(withDuration: duration, animations: { 
 				self.layoutIfNeeded()
-			}
+			})
+//			UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 5.0, options: .curveLinear, animations: { 
+//				self.layoutIfNeeded()
+//			}, completion: nil)
 		} else {
 			self.layoutIfNeeded()
 		}
@@ -192,4 +197,3 @@ class ParalloxView: UIView {
 		performLayoutChanges(with: duration, animated: animated)
 	}
 }
-

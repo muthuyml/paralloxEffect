@@ -32,8 +32,8 @@ class ViewController: UIViewController,ParalloxViewDelegate {
 	
     func paralloxEffectProgress(paralloxView: ParalloxView, progress: CGFloat) {
 		debugPrint("percentage : \(progress)")
-		imageView.alpha = progress
-		let font = 20*progress
+		imageView.alpha = (1-progress)
+		let font = 20*(1-progress)
 		titleLabel.font = UIFont.systemFont(ofSize: font)
     }
 	
@@ -73,6 +73,7 @@ extension ViewController:UIScrollViewDelegate {
 	}
 	
 	func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+		debugPrint("velocity: \(scrollView.panGestureRecognizer.velocity(in: self.view))")
 		if !decelerate {
 			paralloxView?.scrollDidStopped(scrollView: scrollView)
 		}
