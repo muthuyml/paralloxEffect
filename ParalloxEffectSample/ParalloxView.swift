@@ -88,7 +88,12 @@ class ParalloxView: UIView {
 		if (velocity.y > maxTopPositionOfBodyView) && direction == .down{
 			let difference = abs(maxTopPositionOfBodyView - velocity.y)
 			calculatedPosition.bodyViewTopPosition += (difference*2)
-			calculatedPosition.headerViewHeight += difference
+			if maxHeightOfHeaderView <= calculatedPosition.headerViewHeight { // increase same value for header height
+				calculatedPosition.headerViewHeight += difference
+			} else {
+				// increase in half rate
+				calculatedPosition.headerViewHeight += (difference*0.5)
+			}
 			if Double(velocity.y / self.frame.maxY) < duration {
 				duration = Double(self.frame.maxY / velocity.y)
 			}
@@ -149,7 +154,12 @@ class ParalloxView: UIView {
 			if let bodyViewTopValue = bodyViewTopConstraint?.constant,
 				let headerViewHeightValue = headerViewHeightConstraint?.constant {
 				calculatedTopConstraint = bodyViewTopValue - difference
-				calculatedHeaderViewHeight = headerViewHeightValue - (difference*0.5)
+				if maxHeightOfHeaderView <= headerViewHeightValue { // decrease same value for header height
+					calculatedHeaderViewHeight =  headerViewHeightValue - difference
+				} else {
+					// increase in half rate
+					calculatedHeaderViewHeight = headerViewHeightValue - (difference*0.5)
+				}
 			}
 			if calculatedTopConstraint < minTopPositionOfBodyView {
 				calculatedTopConstraint = minTopPositionOfBodyView
