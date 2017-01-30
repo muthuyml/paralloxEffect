@@ -85,7 +85,7 @@ class ParalloxView: UIView {
 		var duration = 0.2 // default duration
 		var calculatedPosition = calculateNewPosition(direction: direction, currentOffset: scrollView.contentOffset)
 		let velocity = scrollView.panGestureRecognizer.velocity(in: self)
-		if velocity.y > maxTopPositionOfBodyView {
+		if (velocity.y > maxTopPositionOfBodyView) && direction == .down{
 			let difference = abs(maxTopPositionOfBodyView - velocity.y)
 			calculatedPosition.bodyViewTopPosition += (difference*2)
 			calculatedPosition.headerViewHeight += difference
@@ -137,7 +137,12 @@ class ParalloxView: UIView {
 			if let bodyViewTopValue = bodyViewTopConstraint?.constant,
 				let headerViewHeightValue = headerViewHeightConstraint?.constant {
 				calculatedTopConstraint =  bodyViewTopValue + difference
-				calculatedHeaderViewHeight =  headerViewHeightValue + difference
+				if maxHeightOfHeaderView <= headerViewHeightValue { // increase same value for header height
+					calculatedHeaderViewHeight =  headerViewHeightValue + difference
+				} else {
+					// increase in half rate
+					calculatedHeaderViewHeight =  headerViewHeightValue + (difference*0.5)
+				}
 			}
 			
 		} else { // pushing up
